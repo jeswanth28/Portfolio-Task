@@ -1,0 +1,32 @@
+.glyphicon-triangle-top{
+	color: green;
+}
+
+.glyphicon-triangle-bottom{
+	color:red;
+}
+.center{
+    margin: auto; 
+    max-width: 550px;
+}
+
+body {
+    padding: 30px;
+}
+.glyphicon.glyphicon-one-fine-dot:before {
+    content: "\25cf";
+    font-size: 1.5em;
+    color:red;
+}
+
+.glyphicon.glyphicon-one-fine-dot1:before {
+    content: "\25cf";
+    font-size: 1.5em;
+    color:yellow;
+}
+
+.glyphicon.glyphicon-one-fine-dot2:before {
+    content: "\25cf";
+    font-size: 1.5em;
+    color:green;
+}

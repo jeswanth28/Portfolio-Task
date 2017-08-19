@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+        crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+        crossorigin="anonymous">
+
+    <!-- Style Sheet Reference -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Jquery plugin for bootstrap -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+
+    <!-- Minified version angular js Library link -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-messages.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+    <script src="http://code.highcharts.com/highcharts.js"></script>
+    <script src="chart.js"></script>
+
+
+    <script src="main.js"></script>
+
+
+</head>
+
+<body ng-app="myModule">
+    <div ng-controller="myCntrl">
+        <div class="container">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Company</th>
+                        <th>Investment(%)</th>
+                        <th>Nos</th>
+                        <th>ABP</th>
+                        <th>LTP</th>
+                        <th>Daily(%)</th>
+                        <th>Total(%)</th>
+                        <th>Value</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="x in contents" ng-click="showChart(x)">
+                        <td>{{x.name}} <span ng-class="{'glyphicon glyphicon-one-fine-dot1': x.valuation == 'fair','glyphicon glyphicon-one-fine-dot':x.valuation == 'unattractive', 'glyphicon glyphicon-one-fine-dot2': x.valuation == 'attractive' }"></span></td>
+                        <td>{{(x.count)*(x.avg_buy_price) | number : 2 }}({{((x.count)*(x.avg_buy_price))/(1000)|number : 2}}%)</td>
+                        <td>{{x.count}}</td>
+                        <td>{{x.avg_buy_price| number : 2}} </td>
+                        <td>{{x.current_price}}</td>
+                        <td><span ng-class="'{{x.daily_percentage > 0}}' ? 'glyphicon glyphicon-triangle-top' : 'glyphicon glyphicon-triangle-bottom'"></span>{{x.daily_percentage}}</td>
+                        <td><span ng-class="'{{x.returns_percentage > 0}}' ? 'glyphicon glyphicon-triangle-top' : 'glyphicon glyphicon-triangle-bottom'"></span>{{x.returns_percentage
+                            | number : 2}}</td>
+                        <td>{{(x.count)*(x.current_price)| number : 2}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div ng-if="showGraph == 'true'">
+            <div class="container">
+                <div class="center">
+                    <div class="row ">
+                        <div class="col-md-2" ng-repeat="x in stockdata">
+
+                            <p>{{x.label}}</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-2" ng-repeat="x in stockdata">
+                            <div>
+
+                                <p><span class="glyphicon glyphicon-triangle-top"></span>{{x.growth}}%</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <chart title="Line chart" xData="lineChartXData" yData="lineChartYData" xName="Month" yName="Value" subtitle="HDFC Bank"></chart>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
