@@ -1,3 +1,3 @@
 # Portfolio-Task
-Stock Portfolio <br \>
+Stock Portfolio 
 Run the html file in local host.
